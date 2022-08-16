@@ -1,15 +1,20 @@
 // Módulos
+const exp = require('constants');
 const express = require('express');
 const app = express();
 const path = require("path");
-const mainRouter=require("./routes/mainRouter")
+const mainRouter=require("./routes/mainRouter");
+const methodOverride = require("method-override");
+
 // Acá falta uno... 😇
 app.set("view engine", "ejs");
 app.set("views",  path.join(__dirname, "views"));
 
 // Configuración
-app
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 app.use(express.static('public'));
+app.use(methodOverride("_method"));
 // Acá falta el template engine
 
 // Rutas
